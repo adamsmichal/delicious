@@ -25,7 +25,7 @@ class UserService {
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        return $user->update($this->getUpdateUserData($request));
+        return $user->update($request->validated());
     }
 
     public function destroy(User $user)
@@ -43,19 +43,6 @@ class UserService {
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => PasswordHandler::generatePassword($request->password)
-        ];
-    }
-
-    /**
-     * @param $request
-     * @return array
-     */
-    private function getUpdateUserData($request)
-    {
-        return [
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
         ];
     }
 }

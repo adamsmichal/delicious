@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,16 +15,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('v1')->group(function() {
-//    Route::group(['middleware' => ['auth:sanctum', 'role:superAdmin admin']],(function() {
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::prefix('users')->group(function() {
+        Route::post('/', [UserController::class, 'store']);
+    });
+
+    Route::group(['middleware' => ['auth:sanctum', 'role:user|restaurant_owner']],(function() {
+        Route::post('/logout', [AuthController::class, 'logout']);
+
         Route::prefix('users')->group(function() {
-            Route::post('/', [UserController::class, 'store']);
             Route::put('/{uuid}', [UserController::class, 'update']);
             Route::delete('/{uuid}', [UserController::class, 'destroy']);
         });
-//    }));
+    }));
 });

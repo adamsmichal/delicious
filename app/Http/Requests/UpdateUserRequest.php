@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'email' => ['email'],
             'phone' => ['string'],
-            'name' => ['string'],
+            'name' => ['string']
         ];
     }
 }

@@ -43,7 +43,6 @@ class UserController extends Controller
         }
 
         return response()->json([
-            'results' => UserResource::make($user),
             'message' => 'User has been updated correctly',
             'error' => false
         ], Response::HTTP_OK);
