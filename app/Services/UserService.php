@@ -28,6 +28,11 @@ class UserService {
         return $user->update($this->getUpdateUserData($request));
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+    }
+
     /**
      * @param $request
      * @return array

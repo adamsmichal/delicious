@@ -48,4 +48,16 @@ class UserController extends Controller
             'error' => false
         ], Response::HTTP_OK);
     }
+
+    public function destroy($userUuid)
+    {
+        $user = User::where('uuid', $userUuid)->first();
+        $this->userService->destroy($user);
+
+        return response()->json([
+            'message' => 'User has been deleted correctly',
+            'error' => false
+        ], Response::HTTP_OK);
+
+    }
 }

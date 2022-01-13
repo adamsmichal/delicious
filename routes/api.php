@@ -24,6 +24,7 @@ Route::prefix('v1')->group(function() {
         Route::prefix('users')->group(function() {
             Route::post('/', [UserController::class, 'store']);
             Route::put('/{uuid}', [UserController::class, 'update']);
+            Route::delete('/{uuid}', [UserController::class, 'destroy']);
         });
 //    }));
 });
