@@ -19,7 +19,8 @@ class RestaurantSeeder extends Seeder
     {
         Restaurant::create([
             'name' => 'TestPub',
-            'tax_number' => '404404'
+            'tax_number' => '404404',
+            'address_id' => 1
         ]);
     }
 }

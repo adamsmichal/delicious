@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,12 @@ Route::prefix('v1')->group(function() {
             Route::get('/{uuid}', [UserController::class, 'show']);
             Route::put('/{uuid}', [UserController::class, 'update']);
             Route::delete('/{uuid}', [UserController::class, 'destroy']);
+        });
+
+        Route::prefix('addresses')->group(function() {
+            Route::post('/', [AddressController::class, 'store']);
+            Route::get('/{uuid}', [AddressController::class, 'show']);
+            Route::put('/{uuid}', [AddressController::class, 'update']);
         });
     }));
 

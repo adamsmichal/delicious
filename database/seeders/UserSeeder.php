@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\PasswordHandler;
-use App\Models\User;
-use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Helpers\PasswordHandler;
+use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'email' => 'testAccount@test.com',
             'phone' => '123456789',
             'password' => PasswordHandler::generatePassword('1234test'),
-            'restaurant_id' => 1
+            'restaurant_id' => 1,
+            'address_id' => 2
         ]);
 
         $user = User::create([
