@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use App\Helpers\PasswordHandler;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -9,7 +11,11 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    /**
+     * @param Request $request
+     * @return Application|ResponseFactory|Response
+     */
+    public function login(Request $request): Response|Application|ResponseFactory
     {
         $user = User::where('email', $request->email)->first();
 
@@ -31,7 +37,11 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function logout(Request $request)
+    /**
+     * @param Request $request
+     * @return Application|ResponseFactory|Response
+     */
+    public function logout(Request $request): Response|Application|ResponseFactory
     {
         $user = User::where('uuid', $request->uuid)->first();
 

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 
-class UserResource extends JsonResource
+class RestaurantResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,9 +18,7 @@ class UserResource extends JsonResource
         return [
             'uuid' => $this->uuid,
             'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'restaurant' => RestaurantResource::make($this->restaurant),
+            'tax_number' => $this->tax_number,
             'created_at' => $this->created_at->toDateTimeString()
         ];
     }
