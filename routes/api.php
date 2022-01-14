@@ -23,27 +23,22 @@ Route::prefix('v1')->group(function() {
         Route::post('/', [UserController::class, 'store']);
     });
 
-    Route::prefix('restaurants')->group(function() {
-        Route::post('/', [RestaurantController::class, 'store']);
-        Route::get('/{uuid}', [RestaurantController::class, 'show']);
-        Route::put('/{uuid}', [RestaurantController::class, 'update']);
-        Route::delete('/{uuid}', [RestaurantController::class, 'destroy']);
-    });
-
     Route::group(['middleware' => ['auth:sanctum', 'role:user|restaurant_account']],(function() {
         Route::post('/logout', [AuthController::class, 'logout']);
-
-//        Route::prefix('restaurants')->group(function() {
-//            Route::post('/', [RestaurantController::class, 'store']);
-//            Route::get('/{uuid}', [RestaurantController::class, 'show']);
-//            Route::put('/{uuid}', [RestaurantController::class, 'update']);
-//            Route::delete('/{uuid}', [RestaurantController::class, 'destroy']);
-//        });
 
         Route::prefix('users')->group(function() {
             Route::get('/{uuid}', [UserController::class, 'show']);
             Route::put('/{uuid}', [UserController::class, 'update']);
             Route::delete('/{uuid}', [UserController::class, 'destroy']);
+        });
+    }));
+
+    Route::group(['middleware' => ['auth:sanctum', 'role:restaurant_account']],(function() {
+        Route::prefix('restaurants')->group(function() {
+            Route::post('/', [RestaurantController::class, 'store']);
+            Route::get('/{uuid}', [RestaurantController::class, 'show']);
+            Route::put('/{uuid}', [RestaurantController::class, 'update']);
+            Route::delete('/{uuid}', [RestaurantController::class, 'destroy']);
         });
     }));
 });
