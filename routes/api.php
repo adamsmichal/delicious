@@ -22,7 +22,7 @@ Route::prefix('v1')->group(function() {
         Route::post('/', [UserController::class, 'store']);
     });
 
-    Route::group(['middleware' => ['auth:sanctum', 'role:user|restaurant_owner']],(function() {
+    Route::group(['middleware' => ['auth:sanctum', 'role:user|restaurant_account']],(function() {
         Route::post('/logout', [AuthController::class, 'logout']);
 
         Route::prefix('users')->group(function() {
