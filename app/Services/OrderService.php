@@ -37,7 +37,6 @@ class OrderService
         return [
             'user_id' => $this->userService->getId($request->userUuid),
 //            'address_id' => $addressId,
-            'number' => $this->getNewOrderNumber(),
             'notes' => $request->notes,
             'payment_status' => OrderPaymentStatusEnum::NOT_PAID,
             'payment_date' => now(),
@@ -49,11 +48,5 @@ class OrderService
 //            'payment_method_id' =>
 //            'discount_id' =>
         ];
-    }
-
-    private function getNewOrderNumber()
-    {
-        $lastNumber = Order::getLastOrderNumber();
-        return  $lastNumber++;
     }
 }

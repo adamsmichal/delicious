@@ -18,9 +18,4 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    static function getLastOrderNumber()
-    {
-        return Order::all()->last();
-    }
 }

@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('address_id')->constrained();
-            $table->integer('number')->unique();
             $table->text('notes')->nullable();
             $table->enum('payment_status', OrderPaymentStatusEnum::TYPES)->default(OrderPaymentStatusEnum::NOT_PAID);
             $table->dateTime('payment_date');
