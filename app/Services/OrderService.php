@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Enums\OrderPaymentStatusEnum;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
+use App\Enums\OrderPaymentStatusEnum;
 use App\Models\Order;
 
 class OrderService
@@ -18,13 +18,12 @@ class OrderService
 
     public function create(StoreOrderRequest $request)
     {
-        $this->getOrderData($request);
-        return true;
+        return Order::create($this->getOrderData($request));
     }
 
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        return true;
+        return $order->update($request->validated());
     }
 
     public function destroy(Order $order)
