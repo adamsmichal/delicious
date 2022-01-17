@@ -29,6 +29,7 @@ class StoreOrderRequest extends FormRequest
             'user_uuid' => ['required', 'uuid'],
             'currency' => ['required', 'size:3'],
             'meals_ids' => ['required'],
+            'address_id' => ['required'],
 //            'payment_method_id' => ['required', 'exists:payment_methods_id']
             'payment_method_id' => ['required']
         ];
