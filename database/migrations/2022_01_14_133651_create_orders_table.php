@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->text('notes')->nullable();
             $table->enum('payment_status', OrderPaymentStatusEnum::TYPES)->default(OrderPaymentStatusEnum::NOT_PAID);
             $table->dateTime('payment_date');
-            $table->integer('product_price')->unsigned();
+            $table->integer('products_price')->unsigned();
             $table->integer('shipment_price')->unsigned();
             $table->integer('total_price')->unsigned();
             $table->string('currency', 3);

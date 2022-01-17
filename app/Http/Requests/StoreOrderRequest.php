@@ -26,11 +26,11 @@ class StoreOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'uuid'],
+            'user_uuid' => ['required', 'uuid'],
             'currency' => ['required', 'size:3'],
             'meals_ids' => ['required'],
 //            'payment_method_id' => ['required', 'exists:payment_methods_id']
-            'payment_method_id' => ['required', 'exists:payment_methods_id']
+            'payment_method_id' => ['required']
         ];
     }
 

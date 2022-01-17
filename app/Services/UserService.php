@@ -34,6 +34,15 @@ class UserService {
     }
 
     /**
+     * @param $uuid
+     * @return mixed
+     */
+    public function getId($uuid): mixed
+    {
+        return User::where('uuid', $uuid)->value('id');
+    }
+
+    /**
      * @param $request
      * @return array
      */
