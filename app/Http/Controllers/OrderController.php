@@ -15,7 +15,7 @@ class OrderController extends Controller
     /**
      * @var OrderService
      */
-    protected OrderService $orderService;
+    private OrderService $orderService;
 
     /**
      * @param OrderService $orderService
@@ -64,13 +64,12 @@ class OrderController extends Controller
     }
 
     /**
-     * @param $orderUuid
+     * @param string $orderUuid
      * @return JsonResponse
      */
-    public function destroy($orderUuid)
+    public function destroy(string $orderUuid)
     {
-        $order = Order::where('uuid', $orderUuid)->first();
-        $this->orderService->destroy($order);
+        $this->orderService->destroy($orderUuid);
 
         return response()->json([
             'message' => 'Order has been deleted',

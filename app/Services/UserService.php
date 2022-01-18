@@ -7,8 +7,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 
-class UserService {
-
+class UserService
+{
     /**
      * @param StoreUserRequest $request
      * @return mixed
@@ -20,16 +20,21 @@ class UserService {
 
     /**
      * @param UpdateUserRequest $request
-     * @param User $user
+     * @param string $userUuid
      * @return bool
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, string $userUuid)
     {
+        $user = User::where('uuid', $userUuid)->first();
         return $user->update($request->validated());
     }
 
-    public function destroy(User $user)
+    /**
+     * @param string $userUuid
+     */
+    public function destroy(string $userUuid)
     {
+        $user = User::where('uuid', $userUuid)->first();
         $user->delete();
     }
 

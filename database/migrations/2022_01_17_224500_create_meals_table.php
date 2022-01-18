@@ -15,11 +15,12 @@ class CreateMealsTable extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
             $table->string('name');
             $table->foreignId('restaurant_id')->constrained();
             $table->string('photo');
             $table->string('description');
-            $table->string('preparation_time');
+            $table->integer('preparation_time');
             $table->boolean('is_active');
             $table->timestamps();
         });

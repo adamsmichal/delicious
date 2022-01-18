@@ -15,7 +15,7 @@ class RestaurantController extends Controller
     /**
      * @var RestaurantService
      */
-    protected RestaurantService $restaurantService;
+    private RestaurantService $restaurantService;
 
     /**
      * @param RestaurantService $restaurantService
@@ -80,7 +80,6 @@ class RestaurantController extends Controller
      */
     public function destroy($restaurantUuid): JsonResponse
     {
-        $user = Restaurant::where('uuid', $restaurantUuid)->first();
         $this->restaurantService->destroy($user);
 
         return response()->json([

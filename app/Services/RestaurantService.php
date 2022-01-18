@@ -6,7 +6,8 @@ use App\Http\Requests\UpdateRestaurantRequest;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Models\Restaurant;
 
-class RestaurantService {
+class RestaurantService
+{
     /**
      * @param StoreRestaurantRequest $request
      * @return mixed
@@ -18,19 +19,21 @@ class RestaurantService {
 
     /**
      * @param UpdateRestaurantRequest $request
-     * @param Restaurant $restaurant
+     * @param string $restaurantUuid
      * @return bool
      */
-    public function update(UpdateRestaurantRequest $request, Restaurant $restaurant): bool
+    public function update(UpdateRestaurantRequest $request, string $restaurantUuid): bool
     {
+        $restaurant = Restaurant::where('uuid', $restaurantUuid)->first();
         return $restaurant->update($request->validated());
     }
 
     /**
-     * @param Restaurant $restaurant
+     * @param string $restaurantUuid
      */
-    public function destroy(Restaurant $restaurant)
+    public function destroy(string $restaurantUuid)
     {
+        $restaurant = Restaurant::where('uuid', $restaurantUuid)->first();
         $restaurant->delete();
     }
 

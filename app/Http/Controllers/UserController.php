@@ -15,7 +15,7 @@ class UserController extends Controller
     /**
      * @var UserService
      */
-    protected UserService $userService;
+    private UserService $userService;
 
     /**
      * @param UserService $userService
@@ -41,10 +41,10 @@ class UserController extends Controller
     }
 
     /**
-     * @param $userUuid
+     * @param string $userUuid
      * @return JsonResponse
      */
-    public function show($userUuid): JsonResponse
+    public function show(string $userUuid): JsonResponse
     {
         $user = User::where('uuid', $userUuid)->first();
 
@@ -62,8 +62,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $userUuid)
     {
-        $user = User::where('uuid', $userUuid)->first();
-        $userUpdatedCorrectly = $this->userService->update($request, $user);
+        $userUpdatedCorrectly = $this->userService->update($request, $userUuid);
 
         if(!$userUpdatedCorrectly)
         {
@@ -80,14 +79,12 @@ class UserController extends Controller
     }
 
     /**
-     * @param $userUuid
+     * @param string $userUuid
      * @return JsonResponse
-     *
      */
-    public function destroy($userUuid): JsonResponse
+    public function destroy(string $userUuid): JsonResponse
     {
-        $user = User::where('uuid', $userUuid)->first();
-        $this->userService->destroy($user);
+        $this->userService->destroy($userUuid);
 
         return response()->json([
             'message' => 'User has been deleted correctly',

@@ -9,28 +9,51 @@ use App\Models\Order;
 
 class OrderService
 {
+    /**
+     * @var UserService
+     */
     private UserService $userService;
 
+    /**
+     * @param UserService $userService
+     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
+    /**
+     * @param StoreOrderRequest $request
+     * @return mixed
+     */
     public function create(StoreOrderRequest $request)
     {
         return Order::create($this->getOrderData($request));
     }
 
+    /**
+     * @param UpdateOrderRequest $request
+     * @param Order $order
+     * @return bool
+     */
     public function update(UpdateOrderRequest $request, Order $order)
     {
         return $order->update($request->validated());
     }
 
-    public function destroy(Order $order)
+    /**
+     * @param string $orderUuid
+     */
+    public function destroy(string $orderUuid)
     {
+        $order = Order::where('uuid', $orderUuid)->first();
         $order->delete();
     }
 
+    /**
+     * @param StoreOrderRequest $request
+     * @return array
+     */
     private function getOrderData(StoreOrderRequest $request)
     {
         return [

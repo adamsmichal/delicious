@@ -15,7 +15,7 @@ class AddressController extends Controller
     /**
      * @var AddressService
      */
-    protected AddressService $addressService;
+    private AddressService $addressService;
 
     /**
      * @param AddressService $addressService
