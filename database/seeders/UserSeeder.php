@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use App\Helpers\PasswordHandler;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         $restaurantAccount = User::create([
             'email' => 'testAccount@test.com',
             'phone' => '123456789',
-            'password' => PasswordHandler::generatePassword('1234test'),
+            'password' => Hash::make('1234test'),
             'restaurant_id' => 1,
             'address_id' => 2
         ]);
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         $user = User::create([
             'email' => 'testUser@test.com',
             'phone' => '987654321',
-            'password' => PasswordHandler::generatePassword('1234test'),
+            'password' => Hash::make('1234test'),
             'restaurant_id' => null
         ]);
 

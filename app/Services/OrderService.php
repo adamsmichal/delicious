@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\Api\UpdateOrderRequest;
+use App\Http\Requests\Api\StoreOrderRequest;
 use App\Enums\OrderPaymentStatusEnum;
 use App\Models\Order;
 
@@ -33,11 +33,12 @@ class OrderService
 
     /**
      * @param UpdateOrderRequest $request
-     * @param Order $order
+     * @param string $orderUuid
      * @return bool
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(UpdateOrderRequest $request, string $orderUuid)
     {
+        $order = Order::where('uuid', $orderUuid)->first();
         return $order->update($request->validated());
     }
 

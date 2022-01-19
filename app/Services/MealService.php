@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\UpdateMealRequest;
-use App\Http\Requests\StoreMealRequest;
+use App\Http\Requests\Api\UpdateMealRequest;
+use App\Http\Requests\Api\StoreMealRequest;
 use App\Models\Meal;
 
 class MealService
@@ -45,7 +45,7 @@ class MealService
     {
         return [
             'name' => $request->name,
-            'restaurant_id' => $request->restaurant,
+            'restaurant_id' => (int)$request->restaurant_id,
             'photo' => $request->photo,
             'description' => $request->description,
             'preparation_time' => $request->preparation_time,

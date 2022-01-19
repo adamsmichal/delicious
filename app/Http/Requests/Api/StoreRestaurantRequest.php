@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends FormRequest
+class StoreRestaurantRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,9 +14,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['email'],
-            'phone' => ['string'],
-            'name' => ['string']
+            'name' => ['string', 'required'],
+            'tax_number' => ['string', 'required']
         ];
     }
 }

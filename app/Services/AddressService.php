@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\UpdateAddressRequest;
-use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\Api\UpdateAddressRequest;
+use App\Http\Requests\Api\StoreAddressRequest;
 use App\Models\Address;
 
 class AddressService
@@ -12,18 +12,19 @@ class AddressService
      * @param StoreAddressRequest $request
      * @return mixed
      */
-    public function store(StoreAddressRequest $request)
+    public function create(StoreAddressRequest $request)
     {
         return Address::create($this->getAddressData($request));
     }
 
     /**
      * @param UpdateAddressRequest $request
-     * @param Address $address
+     * @param string $addressUuid
      * @return bool
      */
-    public function update(UpdateAddressRequest $request, Address $address)
+    public function update(UpdateAddressRequest $request, string $addressUuid)
     {
+        $address = Address::where('uuid', $addressUuid)->first();
         return $address->update($request->validated());
     }
 

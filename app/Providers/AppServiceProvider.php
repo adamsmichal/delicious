@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Observers\MealObserver;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\RestaurantObserver;
 use App\Observers\AddressObserver;
 use App\Observers\OrderObserver;
+use App\Observers\MealObserver;
 use App\Observers\UserObserver;
 use App\Models\Restaurant;
 use App\Models\Address;

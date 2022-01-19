@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -15,7 +15,7 @@ class StoreMealRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'restaurant_id' => ['required', 'exists:restaurants,id'],
+            'restaurant_id' => ['required','exists:restaurants,id'],
             'photo' => ['required', 'string'],
             'description' => ['required', 'string'],
             'preparation_time' => ['required', 'integer'],

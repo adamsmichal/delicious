@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Http\Requests\UpdateRestaurantRequest;
-use App\Http\Requests\StoreRestaurantRequest;
+use App\Http\Requests\Api\UpdateRestaurantRequest;
+use App\Http\Requests\Api\StoreRestaurantRequest;
 use App\Models\Restaurant;
 
 class RestaurantService

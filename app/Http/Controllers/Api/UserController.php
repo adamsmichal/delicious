@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Resources\UserResource;
+use App\Http\Requests\Api\UpdateUserRequest;
+use App\Http\Requests\Api\StoreUserRequest;
+use App\Http\Resources\Api\UserResource;
 use Illuminate\Http\JsonResponse;
 use App\Services\UserService;
 use Illuminate\Http\Response;
 use App\Models\User;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     /**
      * @var UserService
@@ -32,12 +32,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request): JsonResponse
     {
         $user = $this->userService->create($request);
-
-        return response()->json([
-            'results' => UserResource::make($user),
-            'message' => 'User has been created correctly',
-            'error' => false
-        ], Response::HTTP_CREATED);
+        return $this->responseWithSuccess('User has been created correctly', Response::HTTP_CREATED, UserResource::make($user));
     }
 
     /**
@@ -47,12 +42,7 @@ class UserController extends Controller
     public function show(string $userUuid): JsonResponse
     {
         $user = User::where('uuid', $userUuid)->first();
-
-        return response()->json([
-            'results' => UserResource::make($user),
-            'message' => 'User has been found',
-            'error' => false
-        ], Response::HTTP_OK);
+        return $this->responseWithSuccess('User has been found', Response::HTTP_OK, UserResource::make($user));
     }
 
     /**
@@ -60,22 +50,16 @@ class UserController extends Controller
      * @param string $userUuid
      * @return JsonResponse
      */
-    public function update(UpdateUserRequest $request, string $userUuid)
+    public function update(UpdateUserRequest $request, string $userUuid): JsonResponse
     {
         $userUpdatedCorrectly = $this->userService->update($request, $userUuid);
 
         if(!$userUpdatedCorrectly)
         {
-            return response()->json([
-                'message' => 'Something went wrong',
-                'error' => true
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->responseWithError('Something went wrong', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json([
-            'message' => 'User has been updated correctly',
-            'error' => false
-        ], Response::HTTP_OK);
+        return $this->responseWithSuccess('User has been updated correctly', Response::HTTP_OK);
     }
 
     /**
@@ -85,10 +69,6 @@ class UserController extends Controller
     public function destroy(string $userUuid): JsonResponse
     {
         $this->userService->destroy($userUuid);
-
-        return response()->json([
-            'message' => 'User has been deleted correctly',
-            'error' => false
-        ], Response::HTTP_OK);
+        return $this->responseWithSuccess('User has been deleted correctly', Response::HTTP_OK);
     }
 }

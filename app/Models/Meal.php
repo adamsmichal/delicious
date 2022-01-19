@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
+    use hasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -20,8 +25,19 @@ class Meal extends Model
         'is_active'
     ];
 
-    public function restaurant()
+    /**
+     * @return BelongsTo
+     */
+    public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function mealAttributes(): HasMany
+    {
+        return $this->hasMany(MealAttribute::class);
     }
 }

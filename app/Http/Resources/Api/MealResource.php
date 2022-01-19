@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 
-class AddressResource extends JsonResource
+class MealResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +17,12 @@ class AddressResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'city' => $this->city,
-            'street' => $this->street,
-            'house_number' => $this->house_number,
-            'flat_number' => $this->flat_number,
-            'post_code' => $this->post_code,
-            'country' => $this->country,
-            'country_iso' => $this->country_iso,
+            'name' => $this->name,
+            'photo' => $this->photo,
+            'description' => $this->description,
+            'preparation_time' => $this->preparation_time,
+            'is_active' => $this->is_active,
+            'attributes' => MealAttributeResource::collection($this->mealAttributes),
             'created_at' => $this->created_at->toDateTimeString()
         ];
     }

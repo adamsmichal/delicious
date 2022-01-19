@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Helpers\PasswordHandler;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\Api\UpdateUserRequest;
+use App\Http\Requests\Api\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserService
@@ -56,7 +56,7 @@ class UserService
         return [
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => PasswordHandler::generatePassword($request->password)
+            'password' => Hash::make($request->password)
         ];
     }
 }

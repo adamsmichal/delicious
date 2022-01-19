@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\PasswordHandler;
-use App\Models\Restaurant;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
+use App\Models\Restaurant;
 
 class RestaurantSeeder extends Seeder
 {

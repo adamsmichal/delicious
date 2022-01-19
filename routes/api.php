@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\RestaurantController;
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\MealAttributeController;
+use App\Http\Controllers\Api\RestaurantController;
+use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\MealController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,20 @@ Route::prefix('v1')->group(function() {
             Route::get('/{uuid}', [UserController::class, 'show']);
             Route::put('/{uuid}', [UserController::class, 'update']);
             Route::delete('/{uuid}', [UserController::class, 'destroy']);
+        });
+
+        Route::prefix('meals')->group(function() {
+            Route::get('/', [MealController::class, 'index']);
+            Route::post('/', [MealController::class, 'store']);
+            Route::get('/{uuid}', [MealController::class, 'show']);
+            Route::put('/{uuid}', [MealController::class, 'update']);
+            Route::delete('/{uuid}', [MealController::class, 'destroy']);
+        });
+
+        Route::prefix('meal_attributes')->group(function() {
+            Route::post('/', [MealAttributeController::class, 'store']);
+            Route::put('/{uuid}', [MealAttributeController::class, 'update']);
+            Route::delete('/{uuid}', [MealAttributeController::class, 'destroy']);
         });
 
         Route::prefix('addresses')->group(function() {

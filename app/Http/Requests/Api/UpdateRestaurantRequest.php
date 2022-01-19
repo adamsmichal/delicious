@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMealRequest extends FormRequest
+class UpdateRestaurantRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +15,7 @@ class UpdateMealRequest extends FormRequest
     {
         return [
             'name' => ['string'],
-            'photo' => ['string'],
-            'description' => ['string'],
-            'preparation_time' => ['integer'],
-            'is_active' => ['boolean']
+            'tax_number' => ['string']
         ];
     }
 }
